@@ -11,12 +11,12 @@
         "deploy:contract": "near deploy",
         "deploy:pages": "gh-pages -d dist/",
         "deploy": "npm run build && npm run deploy:contract && npm run deploy:pages",
-        "start": "echo The app is starting! It will automatically open in your browser when ready && env-cmd -f ./neardev/dev-account.env parcel src/index.html --open",
+        "start": "parcel src/index.html --open",
         "dev": "nodemon --watch contract -e ts --exec \"npm run start\"",
         "test": "npm run build:contract:debug && cd contract && npm run test && cd .. && jest test --runInBand",
         "start:testnet": "react-scripts start",
         "build:testnet": "react-scripts build",
-        "buildwebpack": "webpack --mode production"
+        "buildwebpack": "webpack --mode production && cp public/index.html build/index.html"
     },
     "devDependencies": {
         "@babel/core": "^7.16.5",
@@ -33,9 +33,12 @@
         "shelljs": "~0.8.4"
     },
     "dependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.16.5",
+        "@babel/plugin-transform-runtime": "^7.16.5",
         "@emotion/react": "^11.5.0",
         "@emotion/styled": "^11.3.0",
-        "@mui/material": "^5.2.5",
+        "@mui/icons-material": "^5.1.0",
+        "@mui/material": "^5.1.0",
         "buffer": "^6.0.3",
         "fibers": ">= 3.1.0",
         "near-api-js": "~0.43.1",
